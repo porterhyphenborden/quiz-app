@@ -3,7 +3,6 @@ let score = 0;
 
 // Loads question and answer content to page
 function loadQuestion() {
-  console.log('`loadQuestion` ran');
   if (questionNum < STORE.length) {
     $('.nextButton').hide();
     $('.feedback').hide();
@@ -37,7 +36,6 @@ function loadQuestion() {
 
 // Removes initial elements and runs function to load question and answer form
 function handleStart() {
-  console.log('`handleStart` ran');
   $('.startButton').on('click', function(event) {
     $('.js-initialDisplay').remove();
     $('.questionAnswerForm').css('display', 'block');
@@ -68,20 +66,16 @@ function feedbackIncorrect() {
   $('fieldset').before(`<div class="feedback incorrect">INCORRECT!</div>`);
   $('input:checked').parent().addClass('incorrectAns');
   let correctID = STORE[questionNum].correctAnswer;
-  //console.log(correctID);
   $('#' + correctID).parent().addClass('correctAns');
   $('fieldset').append(`<button class="nextButton">NEXT</button>`);
 }
 
 // Verifies answer and determines feedback
 function handleSubmit() {
-  console.log('`handleSubmit` ran');
   $('.questionAnswerForm').on('submit', function(event) {
       event.preventDefault();
       let selected = $('input:checked').attr('id');
-      //console.log(`${selected}`);
       let correctAns = `${STORE[questionNum].correctAnswer}`;
-      //console.log(`${correctAns}`);
       if (selected === correctAns) {
         feedbackCorrect();
       }
@@ -129,8 +123,6 @@ function handleNext() {
     incrementQuestion();
     if (questionNum < STORE.length) {
       loadQuestion();
-      //console.log(STORE.length);
-      //console.log(questionNum);
     }
     else {
       showResults();
